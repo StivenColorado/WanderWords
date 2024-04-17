@@ -1,11 +1,9 @@
 <?php
 require_once "../conexion.php";
 
-// Definir el arreglo de respuesta
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Verificar si se recibieron los datos esperados
     if (
         isset($_POST["nombre"]) &&
         isset($_POST["apellido"]) &&
@@ -14,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         isset($_POST["password"]) &&
         isset($_POST["id_rol"])
     ) {
-        // Recibir los datos del formulario
         $nombre = $_POST["nombre"];
         $apellido = $_POST["apellido"];
         $edad = $_POST["edad"];
@@ -22,44 +19,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $password = $_POST["password"];
         $id_rol = $_POST["id_rol"];
 
-        // Hashear la contraseña antes de almacenarla en la base de datos
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // Obtener la fecha actual
+        $fecha_registro = date('Y-m-d');
 
-        // Preparar la consulta SQL para insertar los datos en la tabla clientes
-        $sql = "INSERT INTO clientes (nombre, apellido, edad, correo, contrasena, id_rol) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql_check = "SELECT COUNT(*) as count FROM clientes WHERE correo = ?";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bind_param("s", $correo);
+        $stmt_check->execute();
+        $result_check = $stmt_check->get_result();
+        $row_check = $result_check->fetch_assoc();
 
-        // Preparar la declaración
-        $stmt = $conn->prepare($sql);
-
-        // Vincular los parámetros
-        $stmt->bind_param("ssissi", $nombre, $apellido, $edad, $correo, $hashed_password, $id_rol);
-
-        // Ejecutar la declaración
-        if ($stmt->execute()) {
-            // Establecer el estado de la respuesta como éxito
-            $response["success"] = true;
-            $response["message"] = "Los datos se han insertado correctamente en la base de datos.";
-        } else {
-            // Establecer el estado de la respuesta como error
+        if ($row_check['count'] > 0) {
             $response["success"] = false;
-            $response["message"] = "Error al insertar los datos en la base de datos: " . $conn->error;
+            $response["message"] = "El correo electrónico ya está registrado.";
+        } else {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql_insert = "INSERT INTO clientes (nombre, apellido, edad, correo, contrasena, id_rol, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->bind_param("ssissis", $nombre, $apellido, $edad, $correo, $hashed_password, $id_rol, $fecha_registro);
+
+            if ($stmt_insert->execute()) {
+                $response["success"] = true;
+                $response["message"] = "Los datos se han insertado correctamente en la base de datos.";
+            } else {
+                // Error al insertar el nuevo registro
+                $response["success"] = false;
+                $response["message"] = "Error al insertar los datos en la base de datos: " . $conn->error;
+            }
+
+            $stmt_insert->close();
         }
 
-        // Cerrar la declaración
-        $stmt->close();
+        $stmt_check->close();
     } else {
-        // Establecer el estado de la respuesta como error
         $response["success"] = false;
         $response["message"] = "No se recibieron todos los datos esperados.";
     }
 } else {
-    // Establecer el estado de la respuesta como error
     $response["success"] = false;
     $response["message"] = "La solicitud debe ser de tipo POST.";
 }
 
-// Enviar la respuesta como JSON
-http_response_code(200); // Establecer el código de estado HTTP como 200 (OK)
-header('Content-Type: application/json'); // Establecer la cabecera Content-Type como JSON
-echo json_encode($response); // Convertir el arreglo de respuesta a JSON y enviarlo
+http_response_code(200);
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>
