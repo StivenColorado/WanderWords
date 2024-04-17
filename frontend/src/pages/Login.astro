@@ -23,8 +23,8 @@ const OPTIONS = [
 		Icon: RegisterIcon,
 	},
 ];
-
 ---
+
 <Layout title="Wanderwords - Login">
 	<main
 		class="box-border w-full min-h-screen bg-lime-100 flex flex-col justify-center items-center gap-1"
@@ -70,7 +70,7 @@ const OPTIONS = [
 						class="absolute inset-y-0 right-0 flex items-center px-2"
 					>
 						<!-- Icono para el campo de correo electrónico -->
-						<EmailIcon class="size-6 text-sm"/>
+						<EmailIcon class="size-6 text-sm" />
 					</div>
 				</div>
 				<div class="relative mb-6 w-4/5">
@@ -80,26 +80,33 @@ const OPTIONS = [
 						class="bg-transparent border rounded-3xl border-gray-300 py-2 px-4 w-full focus:outline-none focus:border-blue-500"
 						id="passwordInput"
 					/>
-					<div
-						class="absolute inset-y-0 right-0 flex items-center px-2"
+					<button type="button"
+						class="absolute inset-y-0 right-0 flex items-center px-2 cursor-pointer"
 						id="togglePasswordVisibility"
 					>
 						<!-- Icono para cambiar la visibilidad de la contraseña -->
-						<EyeIcon class="size-6 text-sm" id="eyeIcon"/>
-						<CloseEyeIcon class="hidden size-6 text-sm" id="closeEyeIcon"/>
-					</div>
+						<EyeIcon class="size-6 text-sm" id="eyeIcon" />
+						<CloseEyeIcon
+							class="hidden size-6 text-sm"
+							id="closeEyeIcon"
+						/>
+					</button>
 				</div>
-				
+
 				<button
 					class="bg-[#95DF89] text-white py-2 px-4 font-bold hover:bg-white hover:text-green-700 transition-colors w-4/5 rounded-3xl"
 					>Ingresar</button
 				>
 				<div class="w-4/5">
-					<p class="text-white text-sm p-2">Si no tienes un cuenta creada <a href="#" class="underline">registrate aqui</a> </p>
+					<p class="text-white text-sm p-2">
+						Si no tienes un cuenta creada <a
+							href="/Register"
+							class="underline">registrate aqui</a
+						>
+					</p>
 				</div>
 			</form>
 		</Container>
 	</main>
-	<script src="../controllers/login.js/showPassword.js"></script>
+	<script src="../controllers/login/showPassword.js"></script>
 </Layout>
-
