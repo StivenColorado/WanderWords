@@ -1,4 +1,17 @@
 <?php
+// Obtener la URL del origen de la solicitud
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Verificar si la solicitud proviene de http://localhost:4321
+if ($origin === 'http://localhost:4321') {
+    // Permitir la solicitud solo si proviene de http://localhost:4321
+    header("Access-Control-Allow-Origin: $origin");
+    // Permitir los métodos POST, GET, OPTIONS
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+    // Permitir los encabezados de la solicitud desde el cliente
+    header("Access-Control-Allow-Headers: Content-Type");
+}
+
 require_once "../conexion.php";
 
 $response = array();
@@ -30,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $row_check = $result_check->fetch_assoc();
 
         if ($row_check['count'] > 0) {
-            $response["success"] = false;
+            $response["status"] = 400;
             $response["message"] = "El correo electrónico ya está registrado.";
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -40,11 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt_insert->bind_param("ssissis", $nombre, $apellido, $edad, $correo, $hashed_password, $id_rol, $fecha_registro);
 
             if ($stmt_insert->execute()) {
-                $response["success"] = true;
+                $response["status"] = 200;
                 $response["message"] = "Los datos se han insertado correctamente en la base de datos.";
             } else {
                 // Error al insertar el nuevo registro
-                $response["success"] = false;
+                $response["status"] = 500;
                 $response["message"] = "Error al insertar los datos en la base de datos: " . $conn->error;
             }
 
@@ -53,15 +66,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $stmt_check->close();
     } else {
-        $response["success"] = false;
+        $response["status"] = 400;
         $response["message"] = "No se recibieron todos los datos esperados.";
     }
 } else {
-    $response["success"] = false;
+    $response["status"] = 405;
     $response["message"] = "La solicitud debe ser de tipo POST.";
 }
 
-http_response_code(200);
+// Establecer el código de respuesta HTTP
+http_response_code($response["status"]);
+
+// Establecer el tipo de contenido como JSON
 header('Content-Type: application/json');
+
+// Enviar la respuesta JSON al cliente
 echo json_encode($response);
 ?>
