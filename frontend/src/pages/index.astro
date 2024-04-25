@@ -3,17 +3,34 @@ import Layout from "../layouts/Layout.astro";
 // iconos
 import Login from "../components/icons/LoginIcon.astro";
 const OPTIONS = [
-	{
-		name: "login",
-		url: "/login",
-		icon: Login,
-	},
+  {
+    name: "login",
+    url: "/login",
+    icon: Login,
+  },
 ];
 ---
 
 <Layout title="Wanderwords - Index">
-	<main class="px-4 w-full bg-red-100">
-		
-		<h1>Home</h1>
-	</main>
+  <main class="px-4 w-full bg-red-100">
+    <h1>Home</h1>
+  </main>
+  <script>
+    import { API_URL } from "../../global";
+
+    fetch(`${API_URL}/usuarios/verificarSesion.php`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.sessionActive) {
+          // La sesión está activa, permitir el acceso
+          console.log("La sesión está activa");
+        } else {
+          // La sesión no está activa, redirigir a la página de inicio de sesión
+          console.log("La sesión no está activa");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al verificar la sesión:", error);
+      });
+  </script>
 </Layout>

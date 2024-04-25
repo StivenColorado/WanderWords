@@ -1,11 +1,16 @@
 const formRegister = document.querySelector('#formularioRegistro');
 var bcrypt = dcodeIO.bcrypt;
+import { API_URL } from "../../../global";
+
+import AWN from "awesome-notifications"
+
+const notifier = new AWN();
 
 formRegister.addEventListener('submit', (e) => {
     e.preventDefault();
     const formularioRegistro = new FormData(e.target);
-    // agregar datos al formulario
     formularioRegistro.append('id_rol', 5);
+
     let text_pass;
     for (const [key, value] of formularioRegistro) {
         if (key === 'password') {
@@ -17,26 +22,24 @@ formRegister.addEventListener('submit', (e) => {
         if (err) {
             console.error("Error al cifrar la contraseña:", err);
         } else {
-            // console.log("Contraseña cifrada:", hash);
             formularioRegistro.append('contrasena', hash);
-            for (const [key, value] of formularioRegistro) {
-                console.log(key, value);
-            }
 
-            fetch('http://localhost/WanderWords/backend/usuarios/registrarUsuario.php', {
+            fetch(`${API_URL}/usuarios/registrarUsuario.php`, {
                 method: 'POST',
                 body: formularioRegistro
             })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('La petición ha fallado');
+                        throw new Error("La solicitud no fue exitosa");
                     }
                     return response.json();
                 })
                 .then(data => {
+                    notifier.success("Los datos se han insertado correctamente en la base de datos.");
                     console.log(data);
                 })
                 .catch(error => {
+                    notifier.warning("Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo.");
                     console.error('Error:', error);
                 });
         }
