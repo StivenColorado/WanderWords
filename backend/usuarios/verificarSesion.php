@@ -12,14 +12,11 @@ try {
     $input = json_decode($inputJSON, true);
     $token = $input['token'];
 
-    // Clave secreta utilizada para firmar y verificar el token (asegúrate de usar la misma clave que usaste para generar el token)
     $secret = "123";
 
-    // Decodificar el token para obtener su contenido
     $decoded = JWT::decode($token, new Key('123', 'HS256'));
     // Verificar si el token es válido y contiene la información esperada
     if ($decoded->user_id) {
-        // El token es válido y contiene el ID del usuario
         // Puedes realizar acciones adicionales aquí si lo deseas
         echo json_encode(["sessionActive" => true]);
     } else {

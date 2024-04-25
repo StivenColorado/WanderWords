@@ -31,9 +31,9 @@ formLogin.addEventListener('submit', (e) => {
                 localStorage.setItem('token', data.token);
 
                 // Redirigir a la página de inicio
-                // setTimeout(() => {
-                //     window.location.href = ROUTES.home;
-                // }, 1500);
+                setTimeout(() => {
+                    window.location.href = ROUTES.home;
+                }, 1500);
             } else {
                 // Mostrar mensaje de error
                 notifier.warning(data.message);
