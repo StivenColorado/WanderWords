@@ -1,5 +1,6 @@
 const formRegister = document.querySelector('#formularioRegistro');
 var bcrypt = dcodeIO.bcrypt;
+import { API_URL } from "../../../global";
 
 formRegister.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ formRegister.addEventListener('submit', (e) => {
                 console.log(key, value);
             }
 
-            fetch('http://localhost/WanderWords/backend/usuarios/registrarUsuario.php', {
+            fetch(`${API_URL}/usuarios/registrarUsuario.php`, {
                 method: 'POST',
                 body: formularioRegistro
             })
