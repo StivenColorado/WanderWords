@@ -1,13 +1,16 @@
 <?php
 require_once "../conexion.php";
 require_once "../cors.php";
+require_once "../vendor/autoload.php"; // Incluye el archivo autoload.php de Composer
+
+use Firebase\JWT\JWT;
 
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (
         isset($_POST["correo"]) &&
-        isset($_POST["contrasena"]) 
+        isset($_POST["contrasena"])
     ) {
         $correo = $_POST["correo"];
         $contrasena = $_POST["contrasena"];
@@ -25,11 +28,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Verificar si la contraseña es correcta
             if (password_verify($contrasena, $hashed_password)) {
-                // Iniciar sesión
-                session_start();
-                $_SESSION["usuario_id"] = $row["id_cliente"]; // Guardar el ID del usuario en la sesión
+                // Generar el token JWT
+                // Define el payload y la clave secreta
+                $payload = array(
+                    "user_id" => $row['id_cliente'],
+                    "correo" => $correo
+                );
+                $secret = "123";
+
+                // Codifica el token JWT usando el payload y la clave secreta
+                $token = JWT::encode($payload, $secret, 'HS256');
+
+
                 $response["status"] = 200;
                 $response["message"] = "Inicio de sesión exitoso.";
+                $response["token"] = $token;
             } else {
                 $response["status"] = 401;
                 $response["message"] = "La contraseña ingresada es incorrecta.";
@@ -57,4 +70,3 @@ header('Content-Type: application/json');
 
 // Enviar la respuesta JSON al cliente
 echo json_encode($response);
-?>

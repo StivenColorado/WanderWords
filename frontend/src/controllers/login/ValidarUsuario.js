@@ -16,25 +16,31 @@ formLogin.addEventListener('submit', (e) => {
         body: formData
     })
         .then(response => {
-            try{
-                console.log(response)
-            }catch(error){
-                console.log(error)
+            if (!response.ok) {
+                throw new Error("La solicitud no fue exitosa");
             }
             return response.json();
         })
         .then(data => {
             if (data.status === 200) {
+                // Inicio de sesión exitoso
                 notifier.success("Inicio de sesión exitoso.");
-                console.log(data);
-                setInterval(() => {
-                    window.location.href = ROUTES.home;
-                }, 1500);
+                console.log(data.token);
+
+                // Guardar el token JWT en el localStorage
+                localStorage.setItem('token', data.token);
+
+                // Redirigir a la página de inicio
+                // setTimeout(() => {
+                //     window.location.href = ROUTES.home;
+                // }, 1500);
             } else {
+                // Mostrar mensaje de error
                 notifier.warning(data.message);
             }
         })
         .catch(error => {
+            // Mostrar mensaje de error
             notifier.warning("Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo.");
             console.error('Error:', error);
         });
