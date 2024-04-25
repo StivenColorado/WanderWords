@@ -1,18 +1,6 @@
 <?php
-// Obtener la URL del origen de la solicitud
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-
-// Verificar si la solicitud proviene de http://localhost:4321
-if ($origin === 'http://localhost:4321') {
-    // Permitir la solicitud solo si proviene de http://localhost:4321
-    header("Access-Control-Allow-Origin: $origin");
-    // Permitir los métodos POST, GET, OPTIONS
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-    // Permitir los encabezados de la solicitud desde el cliente
-    header("Access-Control-Allow-Headers: Content-Type");
-}
-
 require_once "../conexion.php";
+require_once "../cors.php";
 
 $response = array();
 
