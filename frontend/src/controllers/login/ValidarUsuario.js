@@ -25,22 +25,17 @@ formLogin.addEventListener('submit', (e) => {
             if (data.status === 200) {
                 // Inicio de sesión exitoso
                 notifier.success("Inicio de sesión exitoso.");
-                console.log(data.token);
-
-                // Guardar el token JWT en el localStorage
+                // console.log(data.token);
                 localStorage.setItem('token', data.token);
 
-                // Redirigir a la página de inicio
                 setTimeout(() => {
                     window.location.href = ROUTES.home;
                 }, 1500);
             } else {
-                // Mostrar mensaje de error
                 notifier.warning(data.message);
             }
         })
         .catch(error => {
-            // Mostrar mensaje de error
             notifier.warning("Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo.");
             console.error('Error:', error);
         });
