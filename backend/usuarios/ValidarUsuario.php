@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ) {
         $correo = $_POST["correo"];
         $contrasena = $_POST["contrasena"];
-
         // Verificar si el correo y la contraseña existen en la base de datos
         $sql_check = "SELECT * FROM clientes WHERE correo = ?";
         $stmt_check = $conn->prepare($sql_check);
@@ -28,11 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Verificar si la contraseña es correcta
             if (password_verify($contrasena, $hashed_password)) {
+                $expirationTime = time() + (60 * 60);
+
                 // Generar el token JWT
                 // Define el payload y la clave secreta
                 $payload = array(
                     "user_id" => $row['id_cliente'],
-                    "correo" => $correo
+                    "correo" => $correo,
+                    "exp" => $expirationTime 
                 );
                 $secret = "123";
 
