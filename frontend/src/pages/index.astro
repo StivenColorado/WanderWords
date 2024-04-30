@@ -1,22 +1,66 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Gradient from "../components/Gradient.astro";
 // iconos
 import Login from "../components/icons/LoginIcon.astro";
+import Container from "../components/Container.astro";
+import TimeLine from "../components/home/TimeLine.astro";
+import DestinationCard from "../components/home/DestinationCard.astro";
 const OPTIONS = [
   {
     name: "login",
-    url: "/login",
-    icon: Login,
+    url: "/Login",
+    Icon: Login,
   },
 ];
 ---
 
 <Layout title="Wanderwords - Index">
-  <main class="px-4 w-full bg-red-100">
-    <h1>Home</h1>
+  <main class="w-full z-0" id="mean-window-img h-auto min-h-100">
+    <Gradient>
+      <section
+        class="absolute w-full mx-auto h-screen bg-gradient-to-t via-[#00122D]/70 to-[#00122D]/50 from-[#00122D]"
+      >
+      </section>
+    </Gradient>
+
+    <Container class="z-10 h-[100vh]">
+      <Header class="bg-black/50">
+        {
+          OPTIONS.map(({ name, url, Icon }) => (
+            <>
+              <li class="flex flex-row items-center justify-start lg:justify-center  w-full sm:w-[18vw] md:w-[15vw] xl:w-[10vw] gap-2 text-white hover:text-blue-500">
+                <a
+                  href={url}
+                  class="flex items-start justify-start py-2 text-white rounded md:bg-transparent md:text-white md:p-0 md:dark:text-blue-500 hover:text-blue-500 w-full hover:bg-white md:hover:bg-transparent"
+                >
+                  <Icon class="size-6" />
+                  <span class="ml-2">{name}</span>
+                </a>
+              </li>
+            </>
+          ))
+        }
+      </Header>
+      <!-- aqui ya va todo el contenido principal de index -->
+      <section
+        class="flex h-screen justify-start items-center flex-row overflow-hidden"
+      >
+        <!-- aqui va el timeline -->
+        <TimeLine />
+        <!-- aqui va la carta de destinos -->
+        <section class="w-[30vw]">
+          <DestinationCard />
+        </section>
+      </section>
+    </Container>
+
+    <Container class="h-[100vh] z-10 bg-blue-600"> pendejos </Container>
   </main>
+
   <script>
     import { verificarSesion } from "../controllers/verificarSesion";
-	verificarSesion()
+    verificarSesion();
   </script>
 </Layout>
