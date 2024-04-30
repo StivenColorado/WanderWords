@@ -1,6 +1,6 @@
 const formRegister = document.querySelector('#formularioRegistro');
 var bcrypt = dcodeIO.bcrypt;
-import { API_URL } from "../../../global";
+import { API_URL, ROUTES } from "../../../global";
 
 import AWN from "awesome-notifications"
 
@@ -37,6 +37,9 @@ formRegister.addEventListener('submit', (e) => {
                 .then(data => {
                     notifier.success("Los datos se han insertado correctamente en la base de datos.");
                     console.log(data);
+                    setTimeout(() => {
+                        window.location.href = ROUTES.login
+                    }, 2000);
                 })
                 .catch(error => {
                     notifier.warning("Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo.");

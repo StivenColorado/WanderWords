@@ -1,4 +1,5 @@
 <?php
+//en este codigo como puedo proteger las peticiones que sean de url desconocidas?
 require_once "../conexion.php";
 require_once "../cors.php";
 require_once "../vendor/autoload.php"; // Incluye el archivo autoload.php de Composer
