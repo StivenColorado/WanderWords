@@ -1,0 +1,31 @@
+---
+import MoonIcon from "../icons/MoonIcon.astro";
+import SunIcon from "../icons/SunIcon.astro";
+import Button from "./Button.astro";
+---
+
+<div class="flex flex-col p-4 items-start w-full h-full m-20">
+  <h1 class="text-4xl font-bold mb-4">Isla NombreIsla</h1>
+  <div class="flex space-x-4 mb-4">
+    <Button class="bg-white text-green-600">Price <span id="destination-card-price">$1.500.000</span></Button>
+    <Button class="bg-lime-400 text-white">Reservar</Button>
+  </div>
+  <!-- seccion donde van los botones -->
+  <div class="flex space-x-8">
+    <div class="flex items-center space-x-2">
+      <SunIcon class="size-6"/>
+      <span class="text-xl"><span id="destination-card-days">3</span> dias</span>
+    </div>
+    <div class="flex items-center space-x-2">
+        <MoonIcon class="size-6"/>
+        <span class="text-xl"><span id="destination-card-nitghs">3</span> noches</span>
+    </div>
+  </div>
+  <p class="text-sm mt-4" id="destination-card-description">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis metus
+    erat. Phasellus mollis vitae odio quis varius. Duis tincidunt massa sapien,
+    at aliquet augue elementum ac. Ut risus ex, rutrum ut mauris nec, pulvinar
+    molestie tortor. Nulla id enim id mi congue facilisis ac ultrices ipsum. Sed
+    sagittis nisi sit amet elementum dapibus. Phasellus quis imperdiet ligula
+  </p>
+</div>

@@ -6,6 +6,7 @@ import Gradient from "../components/Gradient.astro";
 import Login from "../components/icons/LoginIcon.astro";
 import Container from "../components/Container.astro";
 import TimeLine from "../components/home/TimeLine.astro";
+import DestinationCard from "../components/home/DestinationCard.astro";
 const OPTIONS = [
   {
     name: "login",
@@ -42,10 +43,16 @@ const OPTIONS = [
           ))
         }
       </Header>
-      <section class="flex h-screen justify-start items-center flex-row overflow-hidden">
-        <!-- aqui ya va todo el contenido -->
-       <!-- aqui va el timeline -->
-       <TimeLine/>
+      <!-- aqui ya va todo el contenido principal de index -->
+      <section
+        class="flex h-screen justify-start items-center flex-row overflow-hidden"
+      >
+        <!-- aqui va el timeline -->
+        <TimeLine />
+        <!-- aqui va la carta de destinos -->
+        <section class="w-[30vw]">
+          <DestinationCard />
+        </section>
       </section>
     </Container>
 
