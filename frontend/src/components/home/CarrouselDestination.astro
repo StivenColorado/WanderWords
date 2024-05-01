@@ -1,0 +1,175 @@
+---
+
+---
+
+<div class="relative ml-40 w-[50vw] h-[60vh] flex flex-col">
+  <!-- carrousel -->
+  <div
+    class="flex justify-start items-center w-full h-4/5 overflow-hidden"
+    id="carrousel"
+  >
+    <!-- items del carrusel -->
+    <div
+      class="flex transition-transform duration-300 ease-in-out gap-10"
+      id="carouselItems"
+    >
+      <!-- este item es el que se debera mapear con la info que se reciba de la db -->
+      <!-- item del carrusel -->
+      <div
+        class="w-[20vw] h-[45vh] flex-shrink-0 flex-grow-0 relative rounded-lg item-carrousel flex justify-center items-end"
+      >
+        <img
+          src="https://img.freepik.com/foto-gratis/paisaje-forestal_71767-127.jpg"
+          class="absolute inset-0 w-full h-full object-cover rounded-lg"
+          alt=""
+        />
+        <div
+          class="relative w-full h-[20%] inset-0 flex flex-col justify-center b-0 p-4 bg-black/40 rounded-lg"
+        >
+          <h3 class="text-lg font-semibold mb-2 text-white">Título 1</h3>
+          <!-- input de 5 estrellas -->
+          <div>
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5" title="5 stars" class="text-white">5 stars</label
+            >
+          </div>
+          <!-- otros inputs de estrellas -->
+        </div>
+      </div>
+      <!-- item del carrusel -->
+      <div
+        class="w-[20vw] h-[45vh] flex-shrink-0 flex-grow-0 relative rounded-lg item-carrousel flex justify-center items-end"
+      >
+        <img
+          src="https://content.nationalgeographic.com.es/medio/2018/02/27/playa-de-isuntza-lekeitio__1280x720.jpg"
+          class="absolute inset-0 w-full h-full object-cover rounded-lg"
+          alt=""
+        />
+        <div
+          class="relative w-full h-[20%] inset-0 flex flex-col justify-center b-0 p-4 bg-black/40 rounded-lg"
+        >
+          <h3 class="text-lg font-semibold mb-2 text-white">Título 1</h3>
+          <!-- input de 5 estrellas -->
+          <div>
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5" title="5 stars" class="text-white">5 stars</label
+            >
+          </div>
+          <!-- otros inputs de estrellas -->
+        </div>
+      </div>
+      <!-- item del carrusel -->
+      <div
+        class="w-[20vw] h-[45vh] flex-shrink-0 flex-grow-0 relative rounded-lg item-carrousel flex justify-center items-end"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Cuesta_del_obispo_01.jpg/640px-Cuesta_del_obispo_01.jpg"
+          class="absolute inset-0 w-full h-full object-cover rounded-lg"
+          alt=""
+        />
+        <div
+          class="relative w-full h-[20%] inset-0 flex flex-col justify-center b-0 p-4 bg-black/40 rounded-lg"
+        >
+          <h3 class="text-lg font-semibold mb-2 text-white">Título 1</h3>
+          <!-- input de 5 estrellas -->
+          <div>
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5" title="5 stars" class="text-white">5 stars</label
+            >
+          </div>
+          <!-- otros inputs de estrellas -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- botones del carrusel -->
+  <div class="w-full h-auto p-6 flex flex-row justify-start items-center gap-4">
+    <button
+      class="p-2 bg-[#49719F] rounded-full text-white"
+      id="prevBtn"
+      type="button"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M15 6l-6 6l6 6"></path></svg
+      >
+    </button>
+    <button
+      class="p-2 bg-[#2A568A] rounded-full text-white"
+      id="nextBtn"
+      type="button"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M9 6l6 6l-6 6"></path></svg
+      >
+    </button>
+  </div>
+</div>
+
+<script>
+  const carousel = document.getElementById("carrousel");
+  const carouselItems = document.getElementById("carouselItems");
+  const prevBtn = document.getElementById("prevBtn") as HTMLButtonElement;
+  const nextBtn = document.getElementById("nextBtn");
+  const allCarouselItems = document.querySelectorAll(".item-carrousel").length;
+
+  if (carousel && prevBtn && nextBtn && carouselItems && allCarouselItems) {
+    // console.log(`total de items ${allCarouselItems}`)
+
+    const itemWidth = carousel.offsetWidth / 3; // ancho de cada elemento
+    console.log(`ancho de cada elemetno: ${itemWidth}`);
+    // console.log(itemWidth);
+    // Lógica para mover los elementos del carrusel
+    let currentItem = 0;
+    let currentPosition = 0;
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPosition < allCarouselItems) {
+        // Suma el ancho del elemento actual al valor actual de currentItem
+        currentItem -= itemWidth;
+        currentPosition++; // Esto incrementa la posición
+        console.log("asdfsaf", carousel.offsetWidth);
+        console.log(`current item in nexbtn : ${currentItem}`);
+      } else {
+        prevBtn.disabled = currentPosition >= allCarouselItems;
+      }
+      carouselItems.style.transform = `translateX(${currentItem}px)`;
+
+      // Deshabilita el clic del botón "Prev" si currentPosition es mayor que allCarouselItems
+    });
+
+    nextBtn.addEventListener("click", () => {
+      console.log("PREVBTN");
+      if (currentPosition > 0) {
+        currentPosition--;
+        currentItem += itemWidth ;
+        prevBtn.disabled = currentPosition >= allCarouselItems;
+        carouselItems.style.transform = `translateX(${currentItem}px)`;
+      } else {
+        // Si ya estás en la primera página, no hagas nada
+        console.log("Ya estás en la primera página");
+      }
+    });
+  }
+</script>

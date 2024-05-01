@@ -7,6 +7,7 @@ import Login from "../components/icons/LoginIcon.astro";
 import Container from "../components/Container.astro";
 import TimeLine from "../components/home/TimeLine.astro";
 import DestinationCard from "../components/home/DestinationCard.astro";
+import CarrouselDestination from "../components/home/CarrouselDestination.astro";
 const OPTIONS = [
   {
     name: "login",
@@ -53,6 +54,9 @@ const OPTIONS = [
         <section class="w-[30vw]">
           <DestinationCard />
         </section>
+        
+        <!-- aqui va el carrousel -->
+          <CarrouselDestination/>
       </section>
     </Container>
 
