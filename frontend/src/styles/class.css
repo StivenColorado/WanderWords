@@ -4,16 +4,28 @@
         opacity: 1;
     }
     to {
-        transform: translateY(-10px);
+        transform: translateY(-20px);
         opacity: 0;
     }
 }
+@keyframes fadeDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .animation-fade-up {
     animation: fadeUP .500s alternate ease-in forwards;
 }
 /* animacion de mostrar */
-.animation-fade {
-    animation: fadeUP .500s alternate ease-in forwards;
+.animation-fade-down {
+    animation: fadeDown .500s alternate ease-in forwards;
 }
 
 .timeline-item-active{
