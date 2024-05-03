@@ -8,16 +8,35 @@ import Container from "../components/Container.astro";
 import TimeLine from "../components/home/TimeLine.astro";
 import DestinationCard from "../components/home/DestinationCard.astro";
 import CarrouselDestination from "../components/home/CarrouselDestination.astro";
+import { ROUTES,APP_NAME } from "../../global";
+import TourIcon from "../components/icons/TourIcon.astro";
+import PlaceIcon from "../components/icons/PlaceIcon.astro";
+import ContactIcon from "../components/icons/ContactIcon.astro";
+import TeamIcon from "../components/icons/TeamIcon.astro";
 const OPTIONS = [
   {
-    name: "login",
-    url: "/Login",
-    Icon: Login,
+    name: "Tourest",
+    url: ROUTES.login,
+    Icon: TourIcon,
   },
+  {
+    name: "Lugares",
+    url: ROUTES.login,
+    Icon: PlaceIcon,
+  },
+  {
+    name: "Contactanos",
+    url: ROUTES.login,
+    Icon: ContactIcon,
+  },{
+    name: "Sobre nosotros",
+    url: ROUTES.login,
+    Icon: TeamIcon,
+  },  
 ];
 ---
 
-<Layout title="Wanderwords - Index">
+<Layout title={`${APP_NAME} | Index`}>
   <main class="w-full z-0" id="mean-window-img h-auto min-h-100">
     <Gradient>
       <section

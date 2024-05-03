@@ -1,12 +1,14 @@
 ---
 const { id } = Astro.props;
 ---
-<section
+<img
   id={id}
-  class={`absolute top-0 left-0 w-full h-screen bg-custom-bg bg-cover bg-no-repeat bg-center ${Astro.props.class}`}
+  class={`absolute top-0 left-0 w-full h-screen bg-cover bg-no-repeat bg-center ${Astro.props.class}`}
+  src="https://media.traveler.es/photos/61376d9ec6202df75916013c/4:3/w_1636,h_1227,c_limit/143601.jpg"
+
 >
   <slot />
  
-</section>
+</img>
 
 
