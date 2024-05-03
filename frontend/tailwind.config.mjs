@@ -6,6 +6,7 @@ module.exports = {
 		extend: {
 			backgroundImage: {
 				'custom-bg': `url('/public/background/bg2.png')`,
+				'custom-test': `url('/public/background/bg3.webp')`,
 				'airplane-bg': `url('/public/background/airplane.webp')`,
 			},
 		},
