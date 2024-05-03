@@ -9,25 +9,29 @@ import TimeLine from "../components/home/TimeLine.astro";
 import DestinationCard from "../components/home/DestinationCard.astro";
 import CarrouselDestination from "../components/home/CarrouselDestination.astro";
 import { ROUTES,APP_NAME } from "../../global";
+import TourIcon from "../components/icons/TourIcon.astro";
+import PlaceIcon from "../components/icons/PlaceIcon.astro";
+import ContactIcon from "../components/icons/ContactIcon.astro";
+import TeamIcon from "../components/icons/TeamIcon.astro";
 const OPTIONS = [
   {
     name: "Tourest",
     url: ROUTES.login,
-    Icon: Login,
+    Icon: TourIcon,
   },
   {
     name: "Lugares",
     url: ROUTES.login,
-    Icon: Login,
+    Icon: PlaceIcon,
   },
   {
     name: "Contactanos",
     url: ROUTES.login,
-    Icon: Login,
+    Icon: ContactIcon,
   },{
     name: "Sobre nosotros",
     url: ROUTES.login,
-    Icon: Login,
+    Icon: TeamIcon,
   },  
 ];
 ---
