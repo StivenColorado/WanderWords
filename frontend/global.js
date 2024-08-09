@@ -1,5 +1,5 @@
 export const API_URL = "http://localhost/WanderWords/backend";
-export const APP_NAME = "WonderWords";
+export const APP_NAME = "Novaturient";
 
 export const ROUTES = {
   home: "/",

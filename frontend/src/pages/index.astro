@@ -8,14 +8,14 @@ import Container from "../components/Container.astro";
 import TimeLine from "../components/home/TimeLine.astro";
 import DestinationCard from "../components/home/DestinationCard.astro";
 import CarrouselDestination from "../components/home/CarrouselDestination.astro";
-import { ROUTES,APP_NAME } from "../../global";
+import { ROUTES, APP_NAME } from "../../global";
 import TourIcon from "../components/icons/TourIcon.astro";
 import PlaceIcon from "../components/icons/PlaceIcon.astro";
 import ContactIcon from "../components/icons/ContactIcon.astro";
 import TeamIcon from "../components/icons/TeamIcon.astro";
 const OPTIONS = [
   {
-    name: "Tourest",
+    name: "Viajes",
     url: ROUTES.login,
     Icon: TourIcon,
   },
@@ -28,11 +28,12 @@ const OPTIONS = [
     name: "Contactanos",
     url: ROUTES.login,
     Icon: ContactIcon,
-  },{
+  },
+  {
     name: "Sobre nosotros",
     url: ROUTES.login,
     Icon: TeamIcon,
-  },  
+  },
 ];
 ---
 
@@ -40,20 +41,20 @@ const OPTIONS = [
   <main class="w-full z-0" id="mean-window-img h-auto min-h-100">
     <Gradient>
       <section
-        class="absolute w-full mx-auto h-screen bg-gradient-to-t via-[#00122D]/70 to-[#00122D]/50 from-[#00122D]"
+        class="absolute w-full mx-auto h-screen bg-gradient-to-t via-[#ced0d4]/70 to-[#ced0d4]/50 from-[#ced0d4]"
       >
       </section>
     </Gradient>
 
     <Container class="z-10 h-[100vh]">
-      <Header class="bg-black/50">
+      <Header class="bg-white/50">
         {
           OPTIONS.map(({ name, url, Icon }) => (
             <>
-              <li class="flex flex-row items-center justify-start lg:justify-center  w-full sm:w-[18vw] md:w-[15vw] xl:w-[10vw] gap-2 text-white hover:text-blue-500">
+              <li class="flex flex-row items-center justify-start lg:justify-center  w-full sm:w-[18vw] md:w-[15vw] xl:w-[10vw] gap-2 text-blue-900 hover:text-blue-500">
                 <a
                   href={url}
-                  class="flex items-start justify-start py-2 text-white rounded md:bg-transparent md:text-white md:p-0 md:dark:text-blue-500 hover:text-blue-500 w-full hover:bg-white md:hover:bg-transparent"
+                  class="flex items-start justify-start py-2 text-blue-900 rounded md:bg-transparent md:text-blue-900 md:p-0 md:dark:text-blue-500 hover:text-blue-500 w-full hover:bg-white md:hover:bg-transparent"
                 >
                   <Icon class="size-6" />
                   <span class="ml-2">{name}</span>
@@ -73,13 +74,18 @@ const OPTIONS = [
         <section class="w-[30vw]">
           <DestinationCard />
         </section>
-        
+
         <!-- aqui va el carrousel -->
-          <CarrouselDestination/>
+        <CarrouselDestination />
       </section>
     </Container>
 
-    <Container class="h-[100vh] z-10 bg-blue-600">  </Container>
+    <Container class="h-[100vh] z-10">
+      <section
+        class="absolute w-full mx-auto h-screen bg-gradient-to-t via-[#ced0d4]/70 to-[#ced0d4]/50 from-[#ced0d4]"
+      >
+      </section>
+    </Container>
   </main>
 
   <script>
